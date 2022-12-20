@@ -1,0 +1,72 @@
+<div class="top-bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <i class="fa fa-envelope"></i>
+                {{userEmail}}
+            </div>
+            <div class="col-sm-6">
+                <i class="fa fa-phone-alt"></i>
+                {{userPhone}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Top bar End -->
+
+<!-- Nav Bar Start -->
+<div class="nav">
+
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle"></a>
+                <div class="dropdown-menu">
+
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+</div>
+<!-- Nav Bar End -->
+
+<!-- Bottom Bar Start -->
+<div class="bottom-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-3">
+                <h2>Kata Panier</h2>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-3">
+                <div class="user">
+
+                    <a routerLink="cart-list" class="btn cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>({{productInCart}})</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="cart-list">Cart page</a></li>
+        <li class="breadcrumb-item active">{{pageTitle}}</li>
+    </ul>
+</div>

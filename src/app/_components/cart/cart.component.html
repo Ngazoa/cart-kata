@@ -1,0 +1,78 @@
+<app-header [productInCart]="productInCart" [pageTitle]="pageTitle"></app-header>
+
+<div class="cart-page">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="cart-page-inner">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+
+                                            <th>Product</th>
+                                            <th>Taxes</th>
+                                            <th>Price HT</th>
+                                            <th>Price TTC</th>
+                                            <th>Quantity</th>
+                                            <th>Total</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle" *ngIf="this.ArticleList.size>0">
+                                        <tr *ngFor="let article of this.ArticleList.values()">
+                                            <td>
+                                                <div class="img">
+                                                    <a href="#"><img src="assets/img/product-1.jpg" alt="Image"></a>
+                                                    <p>{{article.productName}}</p>
+                                                </div>
+                                            </td>
+                                            <td>{{article.taxes | currency:'EUR':'symbol':'1.2-2' }}</td>
+                                            <td>{{article.HT | currency:'EUR':'symbol':'1.2-2'}}</td>
+                                            <td>{{article.TTC | currency:'EUR':'symbol':'1.2-2'}}</td>
+                                            <td>
+                                                <div class="qty">
+                                                    <input type="text" value="{{article.quantity}}">
+                                                </div>
+                                            </td>
+                                            <td>{{article.prixTotal | currency:'EUR':'symbol':'1.2-2'}}</td>
+                                            <td><button (click)="removeArticle(article.id,article.TTC,article.taxes,article.prixTotal)">
+                                                <i class="fa fa-trash">
+
+                                            </i></button></td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    <div *ngIf="this.ArticleList.size==0">Cart is Empty</div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cart-page-inner">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="coupon">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <button>Purchase</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="cart-summary">
+                                        <div class="cart-content">
+                                            <h1>Cart Summary</h1>
+                                            <p>Taxes Total<span>{{taxesTotal | currency:'EUR':'symbol':'1.2-2'}}</span></p>
+                                            <p>TTC Total<span>{{TTcTotal | currency:'EUR':'symbol':'1.2-2'}}</span></p>
+                                            <h2>Grand Total<span>{{grandTotal | currency:'EUR':'symbol':'1.2-2'}}</span></h2>
+                                        </div>
+                                        <div class="cart-btn">
+                                            <button routerLink="">Update Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,121 @@
+<!-- Child  Header component start -->
+<app-header [productInCart]="productInCart" [pageTitle]="pageTitle"></app-header>
+ <!-- End of header component-->
+
+    <!-- Product List Start -->
+    <div class="product-view">
+        <div class="container-fluid">
+
+            <!-- Display it if  no datas found -->
+           <div  *ngIf="products.length==0">
+                <h1>No data found !</h1>
+           </div>
+            <!--  Test if article or product list isn't empty -->
+            <div class="row"  *ngIf="products.length>0">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="product-search">
+                                           <input type="text" class="form-control mb-4"
+                                            placeholder="Search by category" [(ngModel)]="query">
+                                            <button><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                              </div>
+                       </div>
+            <!--    
+                
+                Generate product list and pagination
+            
+            -->
+              <div class="col-md-4" *ngFor="let product of products|productFilterByName:query|paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                } ;
+                 let i = index">
+                <div class="product-item">
+                    <div class="product-title">
+
+                        <!-- 
+                           this pipe use to modify the product Name
+                           if her length is more than 13 or 
+                           the string is empty
+                        -->
+                        <a href="#">{{ (product.productName.length>13 ||
+                             product.productName.length<1)? 
+                            (product.productName | slice:0:10)+'...'
+                            :(product.productName)}}
+                        </a>
+                        <div class="ratting">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="product-image">
+                        <a href="product-detail.html">
+                            <img src="assets/img/product-2.jpg" alt="Product Image">
+                        </a>
+                        <div class="product-action">
+                            <a (click)="articleChoosed(product)"><i class="fa fa-cart-plus"></i></a>
+                        </div>
+                    </div>
+                    <div class="product-price">
+                         <h6>Quanite {{product.quantity}} </h6>
+                        <h3>{{product.category}}</h3>
+                       
+                        <h3><span> -  </span>{{product.price|currency:'EUR':'symbol':'2.2-2'}}</h3>
+                        <a class="btn"(click)="articleChoosed(product)"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <!--
+        End of product/ article table
+    -->   
+    <div class="col-lg-4 sidebar">
+         <!-- Child Componet  detail product  start  -->
+        <app-products-details [product]="productchoosed" 
+          *ngIf="isVisible" (addPannier)="getCartDetails($event)">
+
+        </app-products-details>
+        <!--End of Child Componet  detail product   -->
+        <h3 *ngIf="!isVisible" > {{alertMessage}}</h3>
+    </div>
+   </div>
+  </div>
+ </div>
+          
+<!-- Controle pagination to 3 elements-->
+<div class="d-flex justify-content-center">
+    <pagination-controls previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+</div>
+
+
+<!-- Footer Bottom Start -->
+<div class="footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 copyright">
+                <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+            </div>
+
+            <div class="col-md-6 template-by">
+                <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Bottom End -->
